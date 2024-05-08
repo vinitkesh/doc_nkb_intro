@@ -236,9 +236,9 @@ C = XY
 |1|0|0|1|
 |1|1|1|0|
 
-<img style="max-width:50%" src="image-0026.png">
+<img style="max-width:40%" src="image-0026.png">
 
-<img style="max-width:49%" src="image-0027.png">
+<img style="max-width:40%" src="image-0027.png">
 
 ### FULL ADDER
 A full adder is a combinational circuit that forms
