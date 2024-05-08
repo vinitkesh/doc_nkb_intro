@@ -56,6 +56,7 @@ kinds of abstraction in Verilog are
 - Behavioral level  
 - Register-transfer level  
 - Gate level  
+  
 ### Behavioral: 
 
 This is the highest level of abstraction provided by Verilog HDL. It
@@ -81,8 +82,11 @@ signals.
 ---
 
 ### Functional Differences
+
 ### Behavioral Level
+
 #### Pros
+
 - Easy to write and understand, especially for complex algorithms and
 high-level functionality.
 - Portability: the same behavioral code can be synthesized into different
@@ -129,17 +133,21 @@ complex designs.
 ---
 
 ## VERILOG SYNTAX
+
 #### CODE:
+
 ```v
 module half_adder(output s, c, input a, b);
     assign s = a ^ b;
     assign c = a & b;
 endmodule
 ```
+
 ```module``` is always terminated by ```endmodule```. Always specify output first and
 then input.
 
 #### TESTBENCH:
+
 ```v
 module half_adder_test;
     reg in1, in2;
@@ -163,6 +171,7 @@ begin end is used to specify a block of code.
 --- 
 
 # BASIC LOGIC GATES
+
 Logic gates are basic building blocks of digital electronics circuits that
 perform logical operations on one or more binary inputs and produce a
 binary output. In other words, a logic gate is an electronic device that
@@ -227,7 +236,7 @@ obtained from the truth table, are
 |1|0|0|1|
 |1|1|1|0|
 
-<img style="max-width:47%" src="image-0026.png"></img> <img style="max-width:49%" src="image-0027.png"/></img>
+<img style="max-width:47%" src="image-0026.png"> <img style="max-width:49%" src="image-0027.png">
 
 ### FULL ADDER
 A full adder is a combinational circuit that forms
