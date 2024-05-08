@@ -227,7 +227,7 @@ obtained from the truth table, are
 |1|0|0|1|
 |1|1|1|0|
 
-<img style="max-width:49%" src="image-0026.png"></img> <img style="max-width:49%" src="image-0027.png"/></img>
+<img style="max-width:47%" src="image-0026.png"></img> <img style="max-width:49%" src="image-0027.png"/></img>
 
 ### FULL ADDER
 A full adder is a combinational circuit that forms
@@ -246,8 +246,11 @@ two outputs are
 
 <img style="max-width:80%" src="image-0032.png">
 
-**S = (X ⊕ Y) ⊕ Z**  
-**C = XY + Z(X ⊕ Y)**
+|S = (X ⊕ Y) ⊕ Z|
+|---|
+
+|C = XY + Z(X ⊕ Y)|
+|---|
 
 ### RIPPLE CARRY ADDER  
 
@@ -265,13 +268,16 @@ carry adder.
 ### CARRY LOOK AHEAD ADDER
 
 Define two new binary variables  
-> Pi = Ai XOR Bi  
-> Gi = Ai AND Bi  
+|Pi = Ai XOR Bi|  
+|---|
+
+|Gi = Ai AND Bi|
+|---|
  
 the output sum and carry can respectively be expressed as  
 
-> **Si = Pi XOR Ci**  
-> **Ci+1 = Gi + (Pi AND Ci)**   
+**Si = Pi XOR Ci**  
+**Ci+1 = Gi + (Pi AND Ci)**
 
 Each sum output requires two exclusive-OR gates. The output of the first
 exclusive-OR gate generates the Pi variable, and the AND gate generates the
@@ -280,8 +286,8 @@ generator and applied as inputs to the second exclusive-OR gate. All output
 carries are generated after a delay through two levels of gates. Thus, outputs
 S1 through S3 have equal propagation delay times.
 
-![image-0033.png](image-0035.png)
-![image-0034.png](image-0036.png)
+<img style="width:50%" src="image-0035.png">
+<img style="width:49%" src="image-0036.png">
 
 ### HALF SUBTRACTOR
 A half subtractor is a combinational circuit that subtracts two single-bit
@@ -304,8 +310,8 @@ binary numbers.
 D = A XOR B XOR Bin  
 B’ = Abar AND B OR ((A XOR B)bar)Bin
 
-<img style="width:69%;" src="image-0041.png"> 
-<img style="width:69%" src="image-0042.png">
+<img style="width:40%;" src="image-0041.png"> 
+<img style="width:59%" src="image-0042.png">
 
 ### BINARY ADDER AND SUBTRACTOR
 M-N where M-minuend and N is subtrahend
@@ -391,7 +397,7 @@ positive transition of the clock signal
 is applied instead of active enable.
 Qn+1 = S + R’Qn
 
-<img style="width:69%" src="image-0059.png">
+<img style="width:50%" src="image-0059.png">
 
 ### JK FLIP-FLOP
 
@@ -424,7 +430,7 @@ clock signal.
 
 Qn+1 = D
 
-<img style="width:69%" src="image-0064.png">
+<img style="width:40%" src="image-0064.png">
 
 ### T FLIP-FLOP
 
@@ -439,7 +445,7 @@ those two values complement each other in a T flip-flop.
 
 Qn+1 = T’Q(n) + (Q(n))’T = T XOR Q(n)
 
-<img style="width:100%" src="image-0063.png">
+<img style="width:70%" src="image-0063.png">
 
 ## MULTIPLEXERS
 
@@ -456,7 +462,7 @@ input I 1 to appear at output Y.
 We can see that the equation for the 2–to–1-line multiplexer output Y is  
 Y = S’I0 + SI1
 
-<img src="image-0067.png">
+<img style="width:70%" src="image-0067.png">
 
 ### 4-1 MUX
 
@@ -476,7 +482,7 @@ Y = S1’S0’ I0 + S1’S0 I1 + S1S0’I2 + S1S0 I3
 |1|0|I2|
 |1|1|I3|  
 
-<img style="width:69%" src="image-0068.png">
+<img style="width:50%" src="image-0068.png">
 
 
 ## DEMULTIPLEXERS
@@ -494,8 +500,8 @@ to Y1
 Y0 = S’ D  
 Y1 = S D
 
-<img style="width:69%" src="image-0072.png">
-<img style="width:100%" src="image-0074.png">
+<img style="width:50%" src="image-0072.png">
+<img style="width:50%" src="image-0074.png">
 
 ## PARITY GENERATOR
 
@@ -511,12 +517,12 @@ one group. For instance, let’s assume that we wish to transmit the BCD code
 illustration.) The total code transmitted, including the even parity bit, is
 
 
-<img style="width:70%" src="image-0080.png">
+<img style="width:40%" src="image-0080.png">
 
 Now let’s assume that an error occurs in the third bit from the left (the 1
 becomes a 0)
 
-<img style="width:70%" src="image-0081.png">
+<img style="width:40%" src="image-0081.png">
 
 When this code is received, the parity check circuitry determines that there
 is only a single 1 (odd number), when there should be an even number of 1s.
@@ -545,8 +551,8 @@ binary number.
 binary code bits to get the next Gray code bit.
 Discard carries
 
-<img style="width:50%" src="image-0084.png">
-<img style="width:100%" src="image-0085.png">
+<img style="width:40%" src="image-0084.png">
+<img style="width:80%" src="image-0085.png">
 
 
 
@@ -559,8 +565,8 @@ same as the corresponding bit in the Gray code.
 2. Add each binary code bit generated to the Gray code bit in the
 next adjacent position. Discard carries.
 
-<img style="width:100%" src="image-0086.png">
-<img style="width:100%" src="image-0087.png">
+<img style="width:40%" src="image-0086.png">
+<img style="width:80%" src="image-0087.png">
 
 ## COMPARATORS
 
@@ -582,7 +588,7 @@ of the two numbers is established, and any other inequalities in lower-order
 bit positions must be ignored because it is possible for an opposite
 indication to occur; the highest-order indication must take precedence.
 
-<img style="width:100%" src="image-0090.png">
+<img style="width:50%" src="image-0090.png">
 
 
 ## Registers
@@ -612,9 +618,9 @@ operation. Note that, depending on the flip‐flop, either
 Clear, Clear_b, reset, or reset_b can be used to indicate
 the transfer of the register to an all 0’s state.
 
-<img style="width:70%" src="image-0093.png">
+<img style="width:40%" src="image-0093.png">
 
-### Four bit register with parallel load
+### Four bit register with parallel load**Gi = Ai AND Bi  **
 
 A four‐bit data‐storage register with a load
 control input that is directed through gates
@@ -626,7 +632,7 @@ output of the register. The load input to the
 register determines the action to be taken
 with each clock pulse.
 
-<img style="width:100%" src="image-0094.png">
+<img style="width:70%" src="image-0094.png">
 
 ### SHIFT REGISTERS
 
@@ -635,7 +641,7 @@ with each clock pulse.
 The serial in/serial out shift register accepts data serially—that is, one bit at a
 time on a single line. It produces the stored information on its output also in serial form .
 
-<img style="width:100%" src="image-0097.png">
+<img style="width:70%" src="image-0097.png">
 
 #### Serial In/Parallel Out Shift Registers
 
@@ -647,7 +653,7 @@ data is stored, each bit appears on its respective output line, and all bits are
 available simultaneously, rather than on a bit-by-bit basis as with the serial
 output.
 
-<img style="width:100%" src="image-0098.png">
+<img style="width:70%" src="image-0098.png">
 
 #### Parallel In/Serial Out Shift Registers
 
@@ -655,7 +661,7 @@ For a register with parallel data inputs, the bits are entered simultaneously
 into their respective stages on parallel lines rather than on a bit-by-bit basis
 on one line as with serial data inputs.
 
-<img style="width:100%" src="image-0101.png">
+<img style="width:70%" src="image-0101.png">
 
 #### Parallel In/Parallel Out Shift Registers
 
@@ -663,7 +669,7 @@ Parallel entry and parallel output of data have been discussed. The parallel
 in/parallel out register employs both methods. Immediately following the
 simultaneous entry of all data bits, the bits appear on the parallel outputs.
 
-<img style="width:100%" src="image-0102.png">
+<img style="width:70%" src="image-0102.png">
 
 ## COUNTERS
 
@@ -705,7 +711,7 @@ the flip‐flops respond to the negative‐edge transition of the input. The
 negative transition occurs when the output of the previous flip‐flop to which
 C is connected goes from 1 to 0.
 
-<img style="width:100%" src="image-0105.png">
+<img style="width:60%" src="image-0105.png">
 
 ### BCD RIPPLE COUNTER
 
@@ -726,7 +732,7 @@ The J and K inputs are connected
 either to a permanent 1 signal or to
 outputs of other flip‐flops.
 
-<img style="width:100%" src="image-0108.png">
+<img style="width:50%" src="image-0108.png">
 
 ### 4 BIT SYNCHRONOUS BINARY COUNTER
 
@@ -763,7 +769,7 @@ flip‐flop outputs are 1. Note that
 the flip‐flops trigger on the
 positive edge of the clock.
 
-<img style="width:100%" src="image-0111.png">
+<img style="width:50%" src="image-0111.png">
 
 ### FOUR BIT UP-DOWN BINARY COUNTER
 
@@ -773,7 +779,7 @@ down control input. When the up input is 1, the circuit counts up, since the T
 inputs receive their signals from the values of the previous normal outputs
 of the flip‐flops.
 
-<img style="width:100%" src="image-0114.png">
+<img style="width:80%" src="image-0114.png">
 
 ### BINARY COUNTER WITH PARALLEL LOAD
 
@@ -791,8 +797,8 @@ sequence.the Count control is set to 1 to enable the count through the CLK
 input. Also, recall that the Load control inhibits the count and that the clear
 operation is independent of other control inputs.
 
-<img style="width:100%" src="image-0117.png">
-<img style="width:100%" src="image-0120.png">
+<img style="width:70%" src="image-0117.png">
+<img style="width:7 0%" src="image-0120.png">
 
 ## ARITHMETIC LOGIC UNIT (ALU)
 
@@ -867,8 +873,8 @@ valid bit indicator that is set to 1 when one or more inputs are equal to 1. If 
 inputs are 0, there is no valid input and V is equal to 0. The other two outputs
 are not inspected when V equals 0 and are specified as don’t-care
 conditions.  
-<img style="width:80%" src="image-0129.png">
-<img style="width:100%" src="image-0128.png">
+<img style="width:60%" src="image-0129.png">
+<img style="width:70%" src="image-0128.png">
 
 x = D2+ D3   
 y = D3 + D1 D 2  
@@ -892,8 +898,8 @@ the complement of the inputs, and
 each one of the eight AND gates
 generates one of the minterms.
 
-<img style="width:100%" src="image-0135.png">
-<img style="width:100%" src="image-0136.png">
+<img style="width:70%" src="image-0135.png">
+<img style="width:70%" src="image-0136.png">
 
 ### 2-4 LINE DECODER WITH ENABLE INPUT
 
@@ -906,82 +912,67 @@ when E is equal to 1, regardless of the values of the other two inputs. When
 the circuit is disabled, none of the outputs are equal to 0 and none of the
 minterms are selected.
 
-![](image-0140.png)
+<img style="width:50%" src="image-0140.png">
+<img style="width:49%" src="image-0139.png">
 
-![](image-0139.png)
-
-## HOW TO MAKE A VERILOG PROGRAM
+# HOW TO MAKE A VERILOG PROGRAM
 
 [](image-0143.png)
 
-Create a New Project in your own version of Quartus Prime.
+### Create a New Project in your own version of Quartus Prime.
 
 ![](image-0144.png)
 
-Select an appropriate directory for your Verilog project files
-and create an empty project file template.
+### Select an appropriate directory for your Verilog project files and create an empty project file template.
 
 ![<img style="width:100%" src=](image-0147.png)
 
-Use the 10M50DAF484C7G Board from the MAX 10 Family.
+### Use the 10M50DAF484C7G Board from the MAX 10 Family.
 
 ![](image-0155.png)
 ![](image-0156.png)
 
-Set ModelSim as your Simulation Tool (ModelSim must be
-installed prior) and finish the initialization of the project.
+### Set ModelSim as your Simulation Tool (ModelSim must be installed prior) and finish the initialization of the project.
 
 ![](image-0159.png)
 
 ![](image-0160.png)
 
-Click on the file icon in the top left corner and create a new
-Verilog HDL file.
+### Click on the file icon in the top left corner and create a new Verilog HDL file.
 
 ![](image-0164.png)
 
-When you wish to save your program, simply use Ctrl+S or
-click the Save icon in the top left corner.
+### When you wish to save your program, simply use Ctrl+S or click the Save icon in the top left corner.
 
 ![](image-0169.png)
 ![](image-0170.png)
 
-Before running your program, you must first set a testbench
-for it. Do this by going into the Assignments menu and
-clicking Settings.
+### Before running your program, you must first set a testbench for it. Do this by going into the Assignments menu and clicking Settings.
 
 ![](image-0173.png)
 
 
-Change the NativeLink Setting to Compile Test Bench and
-select the Test Bench file for your program.
+### Change the NativeLink Setting to Compile Test Bench and select the Test Bench file for your program.
 
 ![](image-0176.png)
 
 
-Create a new Test Bench if you are creating one for a new
-program that has not been made before.
+### Create a new Test Bench if you are creating one for a new program that has not been made before.
 
 ![](image-0179.png)
 
 
-Name your Test Bench appropriately (usually just the name
-of the test bench file) and add it to the list of Test Benches.
+### Name your Test Bench appropriately (usually just the name of the test bench file) and add it to the list of Test Benches.
 
 
-After setting your testbench, you can now run and compile
-your program by clicking on the third play button.  
-You will be able to view your circuit design and how it is
-structured, and simulate results using the test bench by
-going to the Tools menu.
+### After setting your testbench, you can now run and compile your program by clicking on the third play button.  
+### You will be able to view your circuit design and how it is structured, and simulate results using the test bench by going to the Tools menu.
 
 ## BIBLIOGRAPHY
 
-Digital Design, 5th Edition by M Morris Mano and Michael Ciletti  
-Digital Fundamentals by Floyd and Jain
-[www.electronicshub.org/demultiplexerdemux](https://www.electronicshub.org/demultiplexerdemux/)
-
-[tutorialspoint.com/digital_circuits/digital_circuits_flip_flops](https://www.tutorialspoint.com/digital_circuits/digital_circuits_flip_flops.htm)
-
-[www.tutorialspoint.com/digital_circuits/digital_circuits_demultiplexers](https://www.tutorialspoint.com/digital_circuits/digital_circuits_demultiplexers.htm)
+1. Digital Design, 5th Edition by M Morris Mano and Michael Ciletti  
+2. Digital Fundamentals by Floyd and Jain  
+3. [www.electronicshub.org/demultiplexerdemux](https://www.electronicshub.org/demultiplexerdemux/)  
+4. [tutorialspoint.com/digital_circuits/digital_circuits_flip_flops](https://www.tutorialspoint.com/digital_circuits/digital_circuits_flip_flops.htm)  
+5. [www.tutorialspoint.com/digital_circuits/digital_circuits_demultiplexers](https://www.tutorialspoint.com/digital_circuits/digital_circuits_demultiplexers.htm)  
 
