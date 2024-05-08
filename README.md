@@ -224,19 +224,19 @@ produce the sum and carry.
 The Boolean functions for the two outputs, easily
 obtained from the truth table, are  
 
-**S = XY + XY = X ⊕ Y**
+S = XY + XY = X ⊕ Y
 
-**C = XY**
+C = XY
 
 
 |x|y|C|S|
-|---|:---:|:----|:----|
+|---|---|----|----|
 |0|0|0|0|
 |0|1|0|1|
 |1|0|0|1|
 |1|1|1|0|
 
-<img style="max-width:50%" src="image-0026.png"> 
+<img style="max-width:50%" src="image-0026.png">
 
 <img style="max-width:49%" src="image-0027.png">
 
