@@ -14,7 +14,7 @@
     */
 
 //WHITESPACE
-____This is indentation of code for making it easy to read
+____ //This is indentation of code for making it easy to read
 
 //OPERATORS
 
