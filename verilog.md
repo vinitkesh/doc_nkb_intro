@@ -158,6 +158,62 @@ Example:
         A = ~(B & C);
     end
 ```
+## Different levels of Verilog modelling
+
+```v
+//https://www.vlsifacts.com/different-coding-styles-verilog-language/
+//BEHAVORIAL
+module Mux_4to1(
+   input [3:0] i,
+   input [1:0] s,
+   output reg o
+);
+ 
+always @(s or i)
+begin
+   case (s)
+      2'b00 : o = i[0];
+      2'b01 : o = i[1];
+      2'b10 : o = i[2];
+      2'b11 : o = i[3];
+      default : o = 1'bx;
+   endcase
+end
+endmodule
+```
+
+```v
+//DATAFLOW
+module Mux_4to1_df(
+    input [3:0] i,
+    input [1:0] s,
+    output o
+    );
+    
+    assign o = (~s[1] & ~s[0] & i[0]) | (~s[1] & s[0] & i[1]) | (s[1] & ~s[0] & i[2]) | (s[1] & s[0] & i[3]);
+endmodule
+```
+
+```v
+//GATE LEVEL
+module Mux_4to1_gate(
+        input [3:0] i,
+        input [1:0] s,
+        output o
+        );
+    
+    wire NS0, NS1;
+    wire Y0, Y1, Y2, Y3;
+    not N1(NS0, s[0]);
+    not N2(NS1, s[1]);
+    and A1(Y0, i[0], NS1, NS0);
+    and A2(Y1, i[1], NS1, s[0]);
+    and A3(Y2, i[2], s[1], NS0);
+    and A4(Y3, i[3], s[1], s[0]);
+    or O1(o, Y0, Y1, Y2, Y3);
+endmodule
+
+```
 
 ## Blocking / Non-Blocking assignment
 
@@ -315,61 +371,4 @@ module test_bench;
             $monitor (" %b| %b | %b | %b |",clk, a, b, c);
     end
 endmodule
-```
-
-## Different levels of Verilog modelling
-
-```v
-//https://www.vlsifacts.com/different-coding-styles-verilog-language/
-//BEHAVORIAL
-module Mux_4to1(
-   input [3:0] i,
-   input [1:0] s,
-   output reg o
-);
- 
-always @(s or i)
-begin
-   case (s)
-      2'b00 : o = i[0];
-      2'b01 : o = i[1];
-      2'b10 : o = i[2];
-      2'b11 : o = i[3];
-      default : o = 1'bx;
-   endcase
-end
-endmodule
-```
-
-```v
-//DATAFLOW
-module Mux_4to1_df(
-    input [3:0] i,
-    input [1:0] s,
-    output o
-    );
-    
-    assign o = (~s[1] & ~s[0] & i[0]) | (~s[1] & s[0] & i[1]) | (s[1] & ~s[0] & i[2]) | (s[1] & s[0] & i[3]);
-endmodule
-```
-
-```v
-//GATE LEVEL
-module Mux_4to1_gate(
-        input [3:0] i,
-        input [1:0] s,
-        output o
-        );
-    
-    wire NS0, NS1;
-    wire Y0, Y1, Y2, Y3;
-    not N1(NS0, s[0]);
-    not N2(NS1, s[1]);
-    and A1(Y0, i[0], NS1, NS0);
-    and A2(Y1, i[1], NS1, s[0]);
-    and A3(Y2, i[2], s[1], NS0);
-    and A4(Y3, i[3], s[1], s[0]);
-    or O1(o, Y0, Y1, Y2, Y3);
-endmodule
-
 ```
