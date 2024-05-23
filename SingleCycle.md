@@ -1,27 +1,27 @@
 # Single Cycle Processor
 
-# Table of Contents
+## Table of Contents
 
 | Sl  No. |     | Topic                                | Page  No. |
 |---------|-----|--------------------------------------|-----------|
-| 1       |     | Overview                             | [1](#)        |
-| 2       |     | Prerequisites                        | 2         |
-| 3       |     | Theory- Control Unit                 | 3         |
-| 4       |     | Theory- Datapath                     | 8         |
-| 5       |     | Implementation                       | 22        |
-|         | 1   | Top Level Module                     | 22        |
-|         | 2   | Data Memory                          | 24        |
-|         | 3   | Instruction Memory                   | 25        |
-|         | 4   | Microprocessor Top Level (MIPS)      | 27        |
-|         | 5   | Controller                           | 29        |
-|         | 6   | Main Decoder                         | 31        |
-|         | 7   | ALU Decoder                          | 33        |
-|         | 8   | Datapath                             | 35        |
-|         | 9   | Register File                        | 38        |
-|         | 10  | Other Functional Units               | 41        |
-| 6       |     | How to Run Instructions?             | 44        |
-| 7       |     | Test Cases for Various Instructions  | 46        |
-| 8       |     | References                           | 53        |
+| 1       |     | Overview                             | [1](#1-overview)        |
+| 2       |     | Prerequisites                        | [2](#2-prerequisites)         |
+| 3       |     | Theory- Control Unit                 | [3](#3-control-unit)         |
+| 4       |     | Theory- Datapath                     | [8](#4-datapath)         |
+| 5       |     | Implementation                       | [22](#5-implementation)        |
+|         | 1   | Top Level Module                     | [22](#1-top-level-module)        |
+|         | 2   | Data Memory                          | [24](#2-data-memory)        |
+|         | 3   | Instruction Memory                   | [25](#3-instruction-memory)        |
+|         | 4   | Microprocessor Top Level (MIPS)      | [27](#4mips)        |
+|         | 5   | Controller                           | [29](#5-controller)        |
+|         | 6   | Main Decoder                         | [31](#6-main-decoder)        |
+|         | 7   | ALU Decoder                          | [33](#7-alu-decoder)        |
+|         | 8   | Datapath                             | [35](#8-datapath)        |
+|         | 9   | Register File                        | [38](#9-three-ported-register)        |
+|         | 10  | Other Functional Units               | [41](#10-some-other-functional-units)        |
+| 6       |     | How to Run Instructions?             | [44](#6-how-to-run-instructions)        |
+| 7       |     | Test Cases for Various Instructions  | [46](#7-test-cases-for-various-instructions)        |
+| 8       |     | References                           | [53](#8-references)        |
 
 ## 1. Overview
 
