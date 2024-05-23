@@ -79,9 +79,7 @@ implemented in terms of logic gates and interconnections between these
 gates. It resembles a schematic drawing with components connected with
 signals.
 
----
-
-### Functional Differences
+## Functional Differences
 
 ### Behavioral Level
 
@@ -100,7 +98,6 @@ functionality before committing to a particular hardware architecture.
 - Can be less efficient in terms of area, power, and performance than
 lower levels of abstraction.
 - More difficult to optimize for timing and power.
-
 
 ### Register Transfer Level (RTL)
 
@@ -179,15 +176,11 @@ operates on logical signals (digital signals) to perform a Boolean function.
 
 There are several types of logic gates, including:
 
-```AND``` **gate:** 
-
-It has two or more input signals and produces a HIGH output only
+```AND``` **gate:** It has two or more input signals and produces a HIGH output only
 if all inputs are HIGH. The AND gate symbol is the dot or multiplication
 symbol.
 
-```OR``` **gate:** 
-
-It has two or more input signals and produces a HIGH output if at
+```OR``` **gate:**  It has two or more input signals and produces a HIGH output if at
 least one input is HIGH. The OR gate symbol is the plus symbol.
 
 ```NOT``` gate (Inverter): It has one input signal and produces the complement
@@ -236,7 +229,6 @@ C = XY
 |1|0|0|1|
 |1|1|1|0|
 
-<img src="">
 <img style="max-width:40%" src="image-0026.png">
 
 <img style="max-width:40%" src="image-0027.png">
@@ -249,7 +241,7 @@ significant bits to be added. The third input, Z,
 represents the carry from the previous lower
 significant position.  
 The simplified sum-of-product functions for the
-two outputs are 
+two outputs are :
 
 <img style="max-width:80%" src="image-0031.png">
 
@@ -885,6 +877,7 @@ valid bit indicator that is set to 1 when one or more inputs are equal to 1. If 
 inputs are 0, there is no valid input and V is equal to 0. The other two outputs
 are not inspected when V equals 0 and are specified as don’t-care
 conditions.  
+
 <img style="width:60%" src="image-0129.png">
 <img style="width:70%" src="image-0128.png">
 
@@ -984,7 +977,7 @@ minterms are selected.
 
 1. Digital Design, 5th Edition by M Morris Mano and Michael Ciletti  
 2. Digital Fundamentals by Floyd and Jain  
-3. [www.electronicshub.org/demultiplexerdemux](https://www.electronicshub.org/demultiplexerdemux/)  
+3. [electronicshub.org/demultiplexerdemux](https://www.electronicshub.org/demultiplexerdemux/)  
 4. [tutorialspoint.com/digital_circuits/digital_circuits_flip_flops](https://www.tutorialspoint.com/digital_circuits/digital_circuits_flip_flops.htm)  
-5. [www.tutorialspoint.com/digital_circuits/digital_circuits_demultiplexers](https://www.tutorialspoint.com/digital_circuits/digital_circuits_demultiplexers.htm)  
+5. [tutorialspoint.com/digital_circuits/digital_circuits_demultiplexers](https://www.tutorialspoint.com/digital_circuits/digital_circuits_demultiplexers.htm)  
 
