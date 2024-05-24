@@ -488,7 +488,7 @@ The instruction is then assigned to ```rd``` .
 ![imem]( ./2024%20Single%20Cycle%20Images/singlecycle-0097.jpg )
 > RTL view of Instruction Memory
 
-### 4.MIPS
+### 4. MIPS
 
 ```v
 module mips(input clk, reset, 
@@ -585,7 +585,7 @@ It acts as a top level module connecting the main decoder and alu decoder. It ha
 
 ![controller](./2024%20Single%20Cycle%20Images/singlecycle-0122.jpg)
 
-RTL View of Main Controller
+> RTL View of Main Controller
 
 ### 6. Main Decoder
 
@@ -642,7 +642,7 @@ It is the main decoder which sets the control signals to 1s and 0s according to 
 > ```always@(*)``` blocks are used to describe **Combinational Logic**, or Logic Gates. ```*``` sets the sensitivity list of the “always” to any values that can have an impact on a value(s) determined by the ```always@(*)``` block.
 
 ![maindec](./2024%20Single%20Cycle%20Images/singlecycle-0110.png)
-RTL View of Main Decoder
+> RTL View of Main Decoder
 
 ## 7. ALU Decoder
 
@@ -979,7 +979,7 @@ add  $4, $2, $3  //$4=$2+$3 ,$4=450+550=1000
 sw   $4, 20($0)  //write address 20 = 1000 
 ```
 
-Machine code
+Machine code:
 
 ```hex
 200201c2 
@@ -1039,7 +1039,7 @@ sub $4,$2, $3 //$4=$2+$3 , $4=550-550=0
 sw $4, 50($0) //write address 50 = 0
 ```
 
-Machine code :
+Machine code:
 
 ```hex
 20020226 
@@ -1095,7 +1095,7 @@ addi $2,$0,25 //initialise $2 =25
 sw $2, 30($0) //write address 30 = 25 
 ```
 
-Machine code :
+Machine code:
 
 ```hex
 20020019 
@@ -1151,7 +1151,7 @@ lw $3,30($0) //$3=[30] = 100
 sw $3,20($0) //write address 20 = 100 
 ```
 
-Machine code
+Machine code:
 
 ```hex
 20020064 
