@@ -360,9 +360,9 @@ As seen above, there are 4 multiplexors required at various stages of the datapa
 Additionally to implement the Jump instruction in the same datapath, an additional MUX, controlled by the jump control signal, is used to determine whether to move to the jump target address or the next consequent instruction. This jump target is obtained by shifting the lower 26 bits of the jump instruction left 2 bits (ie. multiplying by 4) and then concatenating the upper 4 bits of PC + 4 as the high-order bits, thus yielding a 32-bit address.
 
 
-## 5. Implementation 
+# 5. Implementation 
 
-### 1. Top level module
+## 1. Top level module
 
 ![Top](./2024%20Single%20Cycle%20Images/singlecycle-0082.jpg)
 
@@ -379,10 +379,14 @@ module top (input clk, reset,
 endmodule
 ```
 
-The top level module instantiates 3 sub modules ```mips``` , ```imem``` and  ```dmem```
+The top level module instantiates 3 sub modules `mips` , `imem` and  `dmem`.
+
 The `mips` module is the main processor that is responsible for executing instructions.
+
 The `imem` module is the instruction memory, which contains the program instructions.
+
 The `dmem` module is the data memory, which is used for load/store instructions.
+
 Here is a brief description of the input and output ports of the top module:
 
 #### Inputs
