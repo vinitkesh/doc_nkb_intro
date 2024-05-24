@@ -4,7 +4,7 @@
 
 | Sl  No. |     | Topic                                | Page  No. |
 |---------|-----|--------------------------------------|-----------|
-| 1       |     | Overview                             | [1](#1-overview)        |
+| 1       |     | Overview                             | [1](1-overview)        |
 | 2       |     | Prerequisites                        | [2](#2-prerequisites)         |
 | 3       |     | Theory- Control Unit                 | [3](#3-control-unit)         |
 | 4       |     | Theory- Datapath                     | [8](#4-datapath)         |
@@ -23,7 +23,7 @@
 | 7       |     | Test Cases for Various Instructions  | [46](#7-test-cases-for-various-instructions)        |
 | 8       |     | References                           | [53](#8-references)        |
 
-## 1. Overview
+# 1. Overview
 
 
 Till now you have learned to design sequential and combinational logic, in this section you will learn how to create a single cycle processor, specifically the MIPS microprocessor.  
