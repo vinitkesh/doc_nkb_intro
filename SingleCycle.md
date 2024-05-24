@@ -182,14 +182,16 @@ To understand what sign extension is, let’s take an example. Consider the 4 bi
 
 Now that we have seen the different state elements involved in a datapath, let's see the datapath followed by different MIPS instructions. Since we are considering MIPS microprocessor, each instruction is 32 bits long. 
 
-- add 
-It is an R-type instruction of the form add $rd,$rs,$rt 
-The R-type instruction format is
+
+- ### add
+  
+It is an R-type instruction of the form ```add $rd,$rs,$rt```.
+The R-type instruction format is:-
 
 ![](./2024%20Single%20Cycle%20Images/singlecycle-0044.png)
 
 
-The datapath for add instruction is as follows 
+The datapath for add instruction is as follows:-
 
 1. Grab the instruction address from the PC.
 
@@ -223,13 +225,14 @@ The datapath for add instruction is as follows
 ![](./2024%20Single%20Cycle%20Images/singlecycle-0057.png)
 
 
-- ```lw(load word)```  
+- ### lw(load word)
+  
 The lw instruction is of the form `lw $rt immediate($rs)`. It has an I-type instruction format. 
 
 ![lw](./2024%20Single%20Cycle%20Images/singlecycle-0058.png)
 
 The load word instruction copies the data stored at the address ‘immediate+value(rs)’ and stores it into the register rt.  
-The datapath for lw instruction is as follows :-
+The datapath for lw instruction is as follows:-
 
 1. The instruction memory reads the PC and outputs the instruction.
 
@@ -247,18 +250,18 @@ The datapath for lw instruction is as follows :-
 
 ![lw](./2024%20Single%20Cycle%20Images/singlecycle-0061.png)
 
-- ``` sw(store word)```
-    sw instruction is of the form
+- ### sw(store word)
+sw instruction is of the form:-
 
-    ```v
-    sw $rt immediate($rs)
-    ```
+```mips
+   sw $rt immediate($rs)
+```
 
-    The instruction format is again of the form I-type with an opcode 43.
+The instruction format is again of the form I-type with an opcode 43.
 
-The store word instruction writes the data stored in the register rt into the memory address ‘value(rs)+immediate ’.
+The store word instruction writes the data stored in the register rt into the memory address ‘value(rs)+immediate’.
 
-The datapath for sw instruction is as follows :-
+The datapath for sw instruction is as follows:-
 
 1. The instruction memory reads the PC and outputs the instruction.
 
@@ -276,9 +279,9 @@ The datapath for sw instruction is as follows :-
 
 
 
-- ``beq``(branch if equal) 
+- ### beq(branch if equal) 
 
-The beq instruction is of the form
+The beq instruction is of the form:-
 
 ```mips
     beq $rs ,$rt ,immediate
@@ -290,7 +293,7 @@ It has an I-type instruction format.
 
 It compares the contents of rs and rt to check if they are equal and uses the 16-bit immediate field to compute the target address of the branch relative to the current address. 
 
-The datapath for beq instruction is as follows :- 
+The datapath for beq instruction is as follows:- 
 
 1. The instruction memory reads the PC and outputs the instruction.
 
@@ -308,16 +311,16 @@ The datapath for beq instruction is as follows :-
 
 ![beq](./2024%20Single%20Cycle%20Images/singlecycle-0069.png)
 
-- ```j``` (jump)
+- ### j (jump)
  
-The jump instruction is of the form j targaddr. It has a J-type instruction format with opcode 2.
+The jump instruction is of the form `j targaddr`. It has a J-type instruction format with opcode 2.
 
 This instruction uses the 26 bit targaddr to compute jump address and updates the value of PC to jump 
 address. 
 
 ![J-type](./2024%20Single%20Cycle%20Images/singlecycle-0072.png)
 
-The datapath for j instruction is as follows :-
+The datapath for j instruction is as follows:-
 
 1. The instruction memory reads the PC and outputs the instruction.
 
@@ -331,13 +334,13 @@ The datapath for j instruction is as follows :-
 
 ![j](./2024%20Single%20Cycle%20Images/singlecycle-0073.png)
 
-### The Final Datapath
+## The Final Datapath
 
 ![Final](./2024%20Single%20Cycle%20Images/singlecycle-0076.png)
 
 > Fig 4. Simple datapath with control unit (for R-type and I-type)
 
-Here, the input to the control unit is the 6-bit opcode field from the instruction. The outputs are the control signals which serve various purposes :- 
+Here, the input to the control unit is the 6-bit opcode field from the instruction. The outputs are the control signals which serve various purposes:- 
 
 - `RegDst`, `ALUSrc`, `MemtoReg` - 1-bit signals that control the multiplexors.
 
@@ -347,20 +350,20 @@ Here, the input to the control unit is the 6-bit opcode field from the instructi
 
 Note that here, the AND gate is used to combine the Branch control signal with the Zero output from the ALU. This is responsible for the selection of the next PC.
 
-#### Role of Multiplexors
+### Role of Multiplexors
 
-As seen above, there are 4 multiplexors required at various stages of the datapath. They are needed in order to implement both R-type and I-type instructions using the same datapath. Their roles are explained below :- 
+As seen above, there are 4 multiplexors required at various stages of the datapath. They are needed in order to implement both R-type and I-type instructions using the same datapath. Their roles are explained below:- 
 
-1. MUX 1 - This MUX determines which register needs to be written into using the `RegDst` control signal. If it’s 0, the write register number comes from the rt field (in the case of I-type), whereas if it’s 1, the write register number comes from the rd field (for R-type instructions)
+1. `MUX 1` - This MUX determines which register needs to be written into using the `RegDst` control signal. If it’s 0, the write register number comes from the rt field (in the case of I-type), whereas if it’s 1, the write register number comes from the rd field (for R-type instructions).
 
-1. MUX 2 - This MUX is placed at the ALU input with `ALUSrc` as the select line. When it’s 0, an arithmetic-logical instruction is taking place, and the second ALU operand is the data read from the second register. When it’s 1, a memory instruction is taking place, with the second ALU operand being the sign-extended 16-bit immediate field from instruction.
+1. `MUX 2` - This MUX is placed at the ALU input with `ALUSrc` as the select line. When it’s 0, an arithmetic-logical instruction is taking place, and the second ALU operand is the data read from the second register. When it’s 1, a memory instruction is taking place, with the second ALU operand being the sign-extended 16-bit immediate field from instruction.
 
-1. MUX 3 - It chooses which value is stored in the destination register using the `MemtoReg` control signal. This value comes from the ALU (for an R-type instruction) or the memory (for a load).
+1. `MUX 3` - It chooses which value is stored in the destination register using the `MemtoReg` control signal. This value comes from the ALU (for an R-type instruction) or the memory (for a load).
 
-1. MUX 4 - The final MUX is used to select if the PC moves onto the sequentially following instruction address (PC + 4) or branches to a target address. The control signal that achieves this is the output of the `AND gate` which is 1 in case of a branch instruction and 0 otherwise.
+1. `MUX 4` - The final MUX is used to select if the PC moves onto the sequentially following instruction address (PC + 4) or branches to a target address. The control signal that achieves this is the output of the `AND gate` which is 1 in case of a branch instruction and 0 otherwise.
 
 ![Final](./2024%20Single%20Cycle%20Images/singlecycle-0079.png)
-> Fig 4. Datapath with Jump implementation
+> Fig 5. Datapath with Jump implementation
 
 Additionally to implement the Jump instruction in the same datapath, an additional MUX, controlled by the jump control signal, is used to determine whether to move to the jump target address or the next consequent instruction. This jump target is obtained by shifting the lower 26 bits of the jump instruction left 2 bits (ie. multiplying by 4) and then concatenating the upper 4 bits of PC + 4 as the high-order bits, thus yielding a 32-bit address.
 
