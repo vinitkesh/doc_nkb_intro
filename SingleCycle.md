@@ -23,22 +23,24 @@
 | 7       |     | Test Cases for Various Instructions  | [46](#7-test-cases-for-various-instructions)        |
 | 8       |     | References                           | [53](#8-references)        |
 
-## 1. Overview
+# 1. Overview
 
 
 Till now you have learned to design sequential and combinational logic, in this section you will learn how to create a single cycle processor, specifically the MIPS microprocessor.  
 
 This section combines almost every concept covered so far. Abstraction of block diagrams and Verilog HDLis used to describe the arrangement of each component. We exploit regularity and modularity by reusing already created blocks such as ALUs, multiplexers and register files. 
 The microarchitecture is partitioned into datapath and control units. The MIPS microprocessor datapath uses the register file, ALU, memory unit, and instruction decoder to execute instructions. The register file stores data and instructions, the ALU performs operations, the memory unit accesses and stores data, and the instruction decoder controls data flow. 
+
 The control unit of a MIPS microprocessor generates control signals that direct the flow of data between components in the datapath, ensuring that instructions are executed correctly. It receives instructions from the decoder, directs data flow to the correct components, and controls instruction timing.  
+
 Together, the datapath and control units work to execute instructions in the MIPS microprocessor.  
 We will focus on the single-cycle implementation of a subset of MIPS instructions. Additionally, we will compare single-cycle, multicycle, and pipelined microarchitectures for the MIPS processor.
 
-## 2. Prerequisites 
+# 2. Prerequisites 
 
 To create a Verilog MIPS single cycle processor, you should have a strong understanding of digital logic design, computer architecture, and Verilog programming.   
 
-Some of the specific prerequisites include-
+Some of the specific prerequisites include:-
 
 - Knowledge of digital logic design concepts, such as combinational and sequential circuits, logic gates, flip-flops, and registers and implementing these in Verilog HDL.   
 
@@ -52,20 +54,21 @@ Some of the specific prerequisites include-
 
 Additionally, it would be helpful if you were familiar with the MIPS instruction set architecture, including its various instruction formats, opcode values, and functionality.
 
-## 3. Control Unit 
+# 3. Control Unit 
 
-This section covers an implementation of our MIPS subset, which is created by adding a basic control function to the datapath discussed in the previous section. Support for load word (lw), store word (sw), branch equal (beq), and arithmetic-logical instructions like add, sub, AND, OR, and set on less than are all included in this version. It is implemented in 2 parts: the main control Unit and ALU Control Unit. Firstly we look at the instruction format.
+This section covers an implementation of our MIPS subset, which is created by adding a basic control function to the datapath discussed in the previous section. Support for load word (lw), store word (sw), branch if equal (beq), and arithmetic-logical instructions like add, sub, AND, OR, and set on less than are all included in this version. It is implemented in 2 parts: the Main Control Unit and ALU Control Unit. Firstly, we look at the instruction format.
 
 ![CU](./2024%20Single%20Cycle%20Images/singlecycle-0013.png)
+> Fig. 1 
 
-### Instruction Format 
+## Instruction Format 
 
-The 32 bit MIPS instruction can be broken down into the following parts 
+The 32 bit MIPS instruction can be broken down into the following parts:-
 
 ![](./2024%20Single%20Cycle%20Images/singlecycle-0017.png)
-```fig 2```
+> Fig. 2 Instruction Breakdown
 
- The op field, called the opcode, is always contained in bits 31:26. We will refer to this field as ```Op[5:0]``` by standard notation.
+ The op field, called the opcode, is always contained in bits ```31:26```. We will refer to this field as ```Op[5:0]``` by standard notation.
 
 - The two registers to be read are always specified by the rs and rt fields, at positions ````25:21```` and ```20:16```. This is true for the R-type instructions, branch equal, and store.
 
@@ -73,17 +76,18 @@ The 32 bit MIPS instruction can be broken down into the following parts
 
 - The 16-bit offset for branch equal, load, and store is always in positions ```15:0```. 
 
-- The destination register is in one of two places. For a load, it is in bit positions 20:16 (rt), while for an R-type instruction it is in bit positions 15:11 (rd). Thus, we will need to add a multiplexor to select which field of the instruction is used to indicate the register number to be written. 
+- The destination register is in one of two places. For a `load`, it is in bit positions `20:16 (rt)`, while for an `R-type` instruction it is in bit positions `15:11 (rd)`. Thus, we will need to add a multiplexor to select which field of the instruction is used to indicate the register number to be written. 
 
-### Main Control Unit (Main Decoder)
+## Main Control Unit (Main Decoder)
 
-The control unit computes the control  ignals based on the opcode and funct fields of the instruction, `[31:26]` and `[5:0]`.
+The control unit computes the control signals based on the opcode and funct fields of the instruction, `[31:26]` and `[5:0]`.
 
 Most of the control information comes from the opcode, but R-type instructions also use the funct field to determine the ALU operation. The majority of the outputs from the opcode are computed by the main decoder. The 6 bits of the opcode are decoded into various control signals of the Main Decoder as shown in Fig. 3.
 
-![](./2024%20Single%20Cycle%20Images/singlecycle-0020.png) Fig 3. Simple PLA Implementation 
+![](./2024%20Single%20Cycle%20Images/singlecycle-0020.png) 
+> Fig 3. Simple PLA Implementation 
 
-Table 1 explains each of the control signals in detail with all the important information. These nine control (two from ALUOp which are explained later) signals are set on the basis of six input signals to the control unit, which are the opcode bits 31 to 26.
+Table 1 explains each of the control signals in detail with all the important information. These nine control signals (two from ALUOp which are explained later) are set on the basis of six input signals to the control unit, which are the opcode bits 31 to 26.
 
 | Control  Signals |                          Deasserted                         |                                            Asserted                                          |
 |:----------------:|:-----------------------------------------------------------:|:--------------------------------------------------------------------------------------------:|
@@ -100,32 +104,32 @@ Table 1 explains each of the control signals in detail with all the important in
 With the exception of the PCSrc control line, the control unit can set all of the control signals based only on the opcode field of the instruction. 
 If the instruction is branch on equal and the ALU's Zero output is asserted, then the PCSrc control line should also be asserted. We must AND the Zero signal from the ALU with the Branch signal from the control unit in order to produce the PCSrc signal.
 
-### ALU Control Unit (ALU Decoder) 
+## ALU Control Unit (ALU Decoder) 
 
-Depending on the instruction class, the ALU will need to perform one of these functions.
+Depending on the instruction class, the ALU will need to perform one of these functions:-
 
 ![](./2024%20Single%20Cycle%20Images/singlecycle-0023.png)
-Table 2. ALU Control Lines 
+> Table 2. ALU Control Lines 
 
 The main decoder determines a 2-bit ALUOp signal which is used as input for ALU Decoder along with the 6-bit funct (or function) field in the low-order bits of the instruction. The 4 bit output signal of the ALU Control Unit represents the operation to be carried out by the ALU. 
 ![](./2024%20Single%20Cycle%20Images/singlecycle-0026.png)
-Fig 4. ALU Hardware Implementation 
+> Fig 4. ALU Hardware Implementation 
 
 The 2 bit ALUOp sent by the Control Unit indicates whether the operation to be performed should be add (00) for loads and stores, subtract (01) for beq, or determined by the operation encoded in the funct field (10).
 
-#### Understanding the optimal implementation: 
+### Understanding the Optimal Implementation
 
-Using multiple levels of control can reduce the size of the main control unit. Using several smaller control units may also potentially increase the speed of the control unit. Such optimizations are important, since the speed of the control unit is often critical to clock cycle time 
+Using multiple levels of control can reduce the size of the main control unit. Using several smaller control units may also potentially increase the speed of the control unit. Such optimizations are important, since the speed of the control unit is often critical to clock cycle time.
 
-#### ALU Control Truth Table 
+### ALU Control Truth Table 
 
 ![](./2024%20Single%20Cycle%20Images/singlecycle-0027.png)
 
-#### Input-Output Truth Table
+### Input-Output Truth Table
 
 ![](./2024%20Single%20Cycle%20Images/singlecycle-0030.png)
 
-## 4. Datapath
+# 4. Datapath
 
 A datapath is the part of a computer processor that performs arithmetic and logic operations on data. It is a digital circuit that consists of `registers`, an `arithmetic logic unit` (ALU), and `multiplexers`.
 
@@ -133,34 +137,35 @@ The datapath receives instructions and data from the processor's memory and perf
 
 The datapath also includes multiplexers that allow the selection of different input values based on control signals. The control signals are generated by the control unit, which coordinates the operations of the datapath to execute instructions.
 
-The datapath operates on words of data. ``MIPS ``is a ``32-bit architecture``, so we will use a 32-bit datapath. The datapath first decodes the instruction for the control unit which then sets the different multiplexers thereby fixing the datapath. We will split the datapath into different state elements and try to learn them one by one and finally piece them together to create a complete datapath.
+The datapath operates on words of data. ``MIPS`` is a ``32-bit architecture``, so we will use a 32-bit datapath. The datapath first decodes the instruction for the control unit which then sets the different multiplexers thereby fixing the datapath. We will split the datapath into different state elements and try to learn them one by one and finally piece them together to create a complete datapath.
 
-### State elements
+## State elements
 
 There are 5 main state elements required for building the datapath.
 
-#### a) Instruction Memory 
+### a) Instruction Memory 
 
 The program counter contains the address of the instruction to be executed. The first step is to read this instruction from the element called instruction memory. 
-The instruction memory takes the address in PC as the input and fetches the 32 bit instruction, labelled instr. 
+The instruction memory takes the address in PC as the input and fetches the 32 bit instruction, labelled `instr`. 
 
 ![](./2024%20Single%20Cycle%20Images/singlecycle-0033.png)
 
 The processor’s actions depend on the specific instruction that was fetched. 
 
-#### b) Register File 
+### b) Register File 
 
-The register file contains all the available registers. It has two read ports and one write port. Since MIPS architecture contains 32 registers, each register is identified by a unique 5 bit number (log2 32). This unique 5 bit number is given as the input in both read and write ports. 
+The register file contains all the available registers. It has two read ports and one write port. Since MIPS architecture contains 32 registers, each register is identified by a unique 5 bit number (log<sub>2</sub> 32). This unique 5 bit number is given as the input in both read and write ports. 
 The contents of the registers specified via the read ports are given as the output. If the control signal RegWrite is set, the data given in the data port is written into the register given in the write port.
 
 ![](./2024%20Single%20Cycle%20Images/singlecycle-0036.png)
  
-#### c) ALU
+### c) ALU
+
    ALU performs different arithmetic operations on the data depending on the signal received from the control unit. It has two data input ports and an input from the control unit which specifies the operation to be performed. The final result is output through ALU result and zero port is set to 1 if the result is zero. 
 
 ![](./2024%20Single%20Cycle%20Images/singlecycle-0037.png)
 
-#### d) Data Memory 
+### d) Data Memory 
 
 The memory unit is a state element with inputs for the address and the write data, and a single output for the read result.There are separate read and write controls, called MemRead and MemWrite. Only one of these may be asserted at a time.
 
@@ -169,7 +174,7 @@ The memory unit is a state element with inputs for the address and the write dat
 
 ![](./2024%20Single%20Cycle%20Images/singlecycle-0040.png)
 
-#### e) Sign extension 
+### e) Sign extension 
 
 To understand what sign extension is, let’s take an example. Consider the 4 bit number 1100. If we were to sign extend it to an 8 bit number, we take the MSB which in this case is 1 and extend it to make the upper half of the 8 bit number keeping the lower same as the initial 4 bits which gives us 1111 1100. Similarly, this element sign extends a 16 bit number into a 32 bit number.
 
