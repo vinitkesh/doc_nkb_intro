@@ -964,37 +964,40 @@ module alu(i_data_A, i_data_B, i_alu_control,o_result,o_zero_flag);
 endmodule
 ```
 
-## 6. How to Run Instructions
+# 6. How to Run Instructions
 
-Great! Now we have our single cycle microprocessor ready but how do we run assembly code in it? The following steps explain that in detail.
+**Great! Now we have our single cycle microprocessor ready but how do we run assembly code in it? The following steps explain that in detail.**
+
 ( Since its a MIPS implementation of a 32 Bit Microprocessor we shall use MIPS code as the assembly code. )
 
-Steps to run
+## Steps to run
 
 1. Write Down the MIPS code you want to execute.
-    1. Your code should have an instance of the instruction you want to test.
-    1. Make sure the set of instructions ends with a store word (sw) instruction. The output of this “store word” should be dependent on the instruction to be tested. (This will be used for checking if the instruction is executed correctly or not.)
-2. Convert the MIPS Code into machine code with the help of an online convertor.
-3. Save the machine code as “memfile.dat” in your preferred directory.
-4. Update the path (line 6) of “memfile.dat” in the imem module (Instruction Memory) of your Verilog code to the absolute path of the memfile.dat
+    1. Your code should have an instance of the **instruction** you want to test.
+    2. Make sure the set of instructions ends with a **store word** (sw) instruction. **The output of this “store word” should be dependent on the instruction to be tested.** (This will be used for checking if the instruction is executed correctly or not.)
+2. Convert the **MIPS Cod**e into **machine code** with the help of an online convertor.
+3. Save the machine code as `“memfile.dat”` in your preferred directory.
+4. Update the path (line 6) of `“memfile.dat”` in the `imem module` (Instruction Memory) of your Verilog code to the **absolute path of the memfile.dat**
 5. Change the test bench to check the following
-    1. dataaddr- should contain the address of the last store word (X) in the last line of  our machine code in memfile.dat
-    1. writedata- should contain the data being written in memory (Y) in the last store word instruction.
+    1. `dataaddr`- should contain the address of the **last store word (X)** in the last line of  our machine code in memfile.dat
+    1. `writedata`- should contain the **data being written in memory (Y)** in the last store word instruction.
     1. So, in the testbench make the change :
-    (dataadr === X & writedata === Y )
+    `(dataadr === X & writedata === Y )`
 6. Save the module and compile your Verilog code.
-7. Run RTL Simulation.
-8. The transcript section should contain “Simulation succeeded” in the case of a correct implementation and matching dataaddr and writedata.
+7. Run **RTL Simulation**.
+8. The transcript section should contain **“Simulation succeeded”** in the case of a correct implementation and matching dataaddr and writedata.
 
 ![transcript](./2024%20Single%20Cycle%20Images/singlecycle-0134.png)
 
-Fig. Sample transcript output
+> Fig. Sample transcript output
 
-## 7. Test cases for Various Instructions
+<br>
 
-Now we will try to check if our microprocessor implements instructions properly.
+# 7. Test cases for Various Instructions
 
-### 1. add
+**Now we will try to check if our microprocessor implements instructions properly.**
+
+## 1. add
 
 ```mips
 addi $2, $0, 450 //initialise $2 =450 
@@ -1054,12 +1057,12 @@ module testbenchv1;
 endmodule
 ```
 
-### 2. sub
+## 2. sub
 
 ```mips
 addi $2,$0, 550 //initialise $2 =550 
 addi $3,$0, 550 //initialise $3 =550 
-sub $4,$2, $3 //$4=$2+$3 , $4=550-550=0 
+sub $4,$2, $3 //$4=$2-$3 , $4=550-550=0 
 sw $4, 50($0) //write address 50 = 0
 ```
 
@@ -1112,7 +1115,7 @@ module testbenchv1;
  endmodule 
 ```
 
-### 3. sw 
+## 3. sw 
 
 ```mips
 addi $2,$0,25 //initialise $2 =25 
@@ -1141,12 +1144,12 @@ module testbenchv1;
     // initialize test 
     initial 
     begin 
-    reset <= 1; # 22; reset <= 0; 
+        reset <= 1; # 22; reset <= 0; 
     end 
     // generate clock to sequence tests 
     always 
     begin 
-    clk <= 1; # 5; clk <= 0; # 5; 
+        clk <= 1; # 5; clk <= 0; # 5; 
     end 
     // check results 
     always @ (negedge clk) 
@@ -1166,7 +1169,7 @@ module testbenchv1;
 endmodule
 ```
 
-### 4. lw
+## 4. lw
 
 ```mips
 addi $2,$0,100 //initialise $2 =100 
@@ -1185,7 +1188,7 @@ ac030014
 ```
 
 If the value at address location 20 is 100, then lw instruction is working properly. 
-The testbench to check the same is:\
+The testbench to check the same is:
 
 ```v
 module testbenchv1; 
@@ -1198,14 +1201,14 @@ module testbenchv1;
     top dut(clk, reset, writedata, dataadr, memwrite); 
     // initialize test 
     initial 
-        begin 
+    begin 
         reset <= 1; # 22; reset <= 0; 
-        end 
+    end 
     // generate clock to sequence tests 
     always 
-        begin 
+    begin 
         clk <= 1; # 5; clk <= 0; # 5; 
-        end 
+    end 
     // check results 
     always @ (negedge clk) 
         begin 
@@ -1224,7 +1227,7 @@ module testbenchv1;
 endmodule
 ```
 
-### 5. beq
+## 5. beq
 
 ```mips
 main: 
@@ -1286,9 +1289,9 @@ always
 endmodule
 ```
 
-## 8. References
+# 8. References
 
 - "Computer Organization and Design: The Hardware/Software Interface" by David Patterson and John Hennessy
 - “Digital design and Computer architecture” by David Money Harris & Sarah L. Harris.
-- “Digital Logic and Computer Design ”by M. Morris Mano.
+- “Digital Logic and Computer Design” by M. Morris Mano.
 - “Verilog HDL: A Guide to Digital Design and Synthesis ” by Samir Palnitkar.
