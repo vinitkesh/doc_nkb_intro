@@ -4,7 +4,7 @@
 
 | Sl  No. |     | Topic                                | Page  No. |
 |---------|-----|--------------------------------------|-----------|
-| 1       |     | Overview                             | [1](1-overview)        |
+| 1       |     | Overview                             | [1](#1-overview)        |
 | 2       |     | Prerequisites                        | [2](#2-prerequisites)         |
 | 3       |     | Theory- Control Unit                 | [3](#3-control-unit)         |
 | 4       |     | Theory- Datapath                     | [8](#4-datapath)         |
@@ -34,7 +34,7 @@ The control unit of a MIPS microprocessor generates control signals that direct 
 Together, the datapath and control units work to execute instructions in the MIPS microprocessor.  
 We will focus on the single-cycle implementation of a subset of MIPS instructions. Additionally, we will compare single-cycle, multicycle, and pipelined microarchitectures for the MIPS processor.
 
-## 2. Prerequisites 
+# 2. Prerequisites 
 
 To create a Verilog MIPS single cycle processor, you should have a strong understanding of digital logic design, computer architecture, and Verilog programming.   
 
@@ -52,7 +52,7 @@ Some of the specific prerequisites include-
 
 Additionally, it would be helpful if you were familiar with the MIPS instruction set architecture, including its various instruction formats, opcode values, and functionality.
 
-## 3. Control Unit 
+# 3. Control Unit 
 
 This section covers an implementation of our MIPS subset, which is created by adding a basic control function to the datapath discussed in the previous section. Support for load word (lw), store word (sw), branch equal (beq), and arithmetic-logical instructions like add, sub, AND, OR, and set on less than are all included in this version. It is implemented in 2 parts: the main control Unit and ALU Control Unit. Firstly we look at the instruction format.
 
