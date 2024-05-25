@@ -182,11 +182,15 @@ To understand what sign extension is, let’s take an example. Consider the 4 bi
 
 Now that we have seen the different state elements involved in a datapath, let's see the datapath followed by different MIPS instructions. Since we are considering MIPS microprocessor, each instruction is 32 bits long. 
 
+## Datapaths of MIPS Instructions
 
 - ### add
   
-It is an R-type instruction of the form ```add $rd,$rs,$rt```.
-The R-type instruction format is:-
+It is an R-type instruction of the form:-
+```mips
+    add $rd,$rs,$rt
+```
+The has an R-type instruction format.
 
 ![](./2024%20Single%20Cycle%20Images/singlecycle-0044.png)
 
@@ -201,7 +205,6 @@ The datapath for add instruction is as follows:-
 
 ![Decoder](./2024%20Single%20Cycle%20Images/singlecycle-0046.png)
    
-
 
 3. Pass rs,rt and rd into read register and write register ports.
 
@@ -225,13 +228,19 @@ The datapath for add instruction is as follows:-
 ![](./2024%20Single%20Cycle%20Images/singlecycle-0057.png)
 
 
-- ### lw(load word)
+- ### lw (load word)
   
-The lw instruction is of the form `lw $rt immediate($rs)`. It has an I-type instruction format. 
+The lw instruction is of the form:-
+
+```mips
+   lw $rt immediate($rs)
+```
+It has an I-type instruction format with an opcode 35. 
 
 ![lw](./2024%20Single%20Cycle%20Images/singlecycle-0058.png)
 
 The load word instruction copies the data stored at the address ‘immediate+value(rs)’ and stores it into the register rt.  
+
 The datapath for lw instruction is as follows:-
 
 1. The instruction memory reads the PC and outputs the instruction.
@@ -250,16 +259,14 @@ The datapath for lw instruction is as follows:-
 
 ![lw](./2024%20Single%20Cycle%20Images/singlecycle-0061.png)
 
-- ### sw(store word)
+- ### sw (store word)
 sw instruction is of the form:-
 
 ```mips
    sw $rt immediate($rs)
 ```
 
-The instruction format is again of the form I-type with an opcode 43.
-
-The store word instruction writes the data stored in the register rt into the memory address ‘value(rs)+immediate’.
+The instruction format is again of the form I-type with an opcode 43. The store word instruction writes the data stored in the register rt into the memory address ‘value(rs)+immediate’.
 
 The datapath for sw instruction is as follows:-
 
@@ -279,7 +286,7 @@ The datapath for sw instruction is as follows:-
 
 
 
-- ### beq(branch if equal) 
+- ### beq (branch if equal) 
 
 The beq instruction is of the form:-
 
@@ -287,7 +294,7 @@ The beq instruction is of the form:-
     beq $rs ,$rt ,immediate
 ```
 
-It has an I-type instruction format.
+It has an I-type instruction format and its opcode is 4. 
 
 ![I-type](./2024%20Single%20Cycle%20Images/singlecycle-0066.png)
 
@@ -313,12 +320,16 @@ The datapath for beq instruction is as follows:-
 
 - ### j (jump)
  
-The jump instruction is of the form `j targaddr`. It has a J-type instruction format with opcode 2.
+The jump instruction is of the form 
 
-This instruction uses the 26 bit targaddr to compute jump address and updates the value of PC to jump 
-address. 
+```mips
+   j targaddr
+```
+It has a J-type instruction format with opcode 2.
 
 ![J-type](./2024%20Single%20Cycle%20Images/singlecycle-0072.png)
+
+This instruction uses the 26 bit targaddr to compute jump address and updates the value of PC to jump address.
 
 The datapath for j instruction is as follows:-
 
